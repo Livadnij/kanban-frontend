@@ -1,0 +1,50 @@
+{
+  "to_do": [
+    {
+      "id": 1,
+      "title": "Finish presentation slides",
+      "description": "Create slides for the upcoming project presentation. Include key points, visuals, and examples.",
+      "create_time": "2024-05-14T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Research new project management tools",
+      "description": "Explore and evaluate different project management tools to improve team collaboration and productivity.",
+      "create_time": "2024-05-14T12:15:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Schedule team meeting",
+      "description": "Coordinate with team members to set up a meeting to discuss project updates, challenges, and next steps.",
+      "create_time": "2024-05-14T12:30:00Z"
+    }
+  ],
+  "in_progress": [
+    {
+      "id": 4,
+      "title": "Develop prototype for client demo",
+      "description": "Work on creating a prototype of the new feature to showcase to the client during the upcoming demo session.",
+      "create_time": "2024-05-14T12:45:00Z"
+    },
+    {
+      "id": 5,
+      "title": "Review and provide feedback on colleague's code",
+      "description": "Review code submitted by a colleague, provide constructive feedback, and suggest improvements.",
+      "create_time": "2024-05-14T13:00:00Z"
+    }
+  ],
+  "done": [
+    {
+      "id": 6,
+      "title": "Submit project proposal to client",
+      "description": "Finalize and submit the project proposal document to the client for review and approval.",
+      "create_time": "2024-05-14T13:15:00Z"
+    },
+    {
+      "id": 7,
+      "title": "Complete bug fixes for the release",
+      "description": "Address and resolve reported bugs to ensure a smooth release of the latest software version.",
+      "create_time": "2024-05-14T13:30:00Z"
+    }
+  ]
+}
