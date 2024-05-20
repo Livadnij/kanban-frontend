@@ -2,7 +2,7 @@ import axios from "axios";
 import { Task } from "../types/Task";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://kanban-backend-02ml.onrender.com/api",
 });
 
 export interface Board {
