@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import StoreStateManager from "./Store.StateManager";
+import StoreStateManager from "./stateManager";
 
 const rootReducer = combineReducers({
   globalState: StoreStateManager,

@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Box,
   Button,
@@ -7,28 +9,29 @@ import {
   ModalDialog,
   Typography,
 } from "@mui/joy";
-import React, { useState } from "react";
-import { Board, createBoard } from "../../api/api";
-import { useDispatch } from "react-redux";
-import { loadExistingBoard } from "../store/Store.StateManager";
 
-type ModalBoardCreateProps = {
+import { createBoard } from "../../api/requests";
+import { loadExistingBoard } from "../../store/stateManager";
+
+type CreateBoardModal = {
   setCurrentBoard: React.Dispatch<React.SetStateAction<Board | null>>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function ModalBoardCreate({
+export const CreateBoardModal: React.FC<CreateBoardModal> = ({
   open,
   setOpen,
   setCurrentBoard,
-}: ModalBoardCreateProps) {
+}) => {
   const dispatch = useDispatch();
   const [boardName, setBoardName] = useState<string | null>(null);
   const [boardID, setBoardID] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function createNewBoard() {
     if (boardName !== null) {
+      setLoading(true);
       const newBoardID = await createBoard({
         name: boardName,
         to_do: [],
@@ -45,6 +48,7 @@ export function ModalBoardCreate({
       setBoardID(newBoardID);
       setCurrentBoard(currentBoard);
       dispatch(loadExistingBoard(currentBoard));
+      setLoading(false);
     }
   }
 
@@ -72,6 +76,7 @@ export function ModalBoardCreate({
           <Typography level="h2">{boardID}</Typography>
         </Box>
         <Button
+          loading={loading}
           sx={{ display: `${boardID !== null ? "none" : ""}` }}
           onClick={() => {
             createNewBoard();
@@ -82,4 +87,4 @@ export function ModalBoardCreate({
       </ModalDialog>
     </Modal>
   );
-}
+};

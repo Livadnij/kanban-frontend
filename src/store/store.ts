@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import globalStateReducer from "./Store.StateManager";
+
+import globalStateReducer from "./stateManager";
 
 const store = configureStore({
   reducer: {

@@ -1,44 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ItemState, Task } from "../../types/Task";
 
 // Define types for the state
-interface BoardState {
+type BoardState = {
   _id: string;
   name: string;
   to_do: Task[];
   in_progress: Task[];
   done: Task[];
-}
+};
 
 // Define types for the action payloads
-interface LoadExistingBoardPayload {
+type LoadExistingBoardPayload = {
   _id: string;
   name: string;
   to_do: Task[];
   in_progress: Task[];
   done: Task[];
-}
+};
 
-interface AddItemPayload {
+type AddItemPayload = {
   destination: keyof BoardState;
   item: Task;
-}
+};
 
-interface ChangeItemStatePayload {
-  origin: ItemState;
-  destination: ItemState;
+type ChangeItemStatusPayload = {
+  origin: ItemStatus;
+  destination: ItemStatus;
   id: string;
-}
+};
 
-interface EditItemValue {
+type EditItemValue = {
   item: Task;
-  origin: ItemState;
-}
+  origin: ItemStatus;
+};
 
-interface DeleteItem {
+type DeleteItem = {
   id: string;
-  origin: ItemState;
-}
+  origin: ItemStatus;
+};
 
 // Define the initial state with the BoardState type
 const initialState: BoardState = {
@@ -71,7 +70,10 @@ const GlobalState = createSlice({
         state[action.payload.destination].push(action.payload.item);
       }
     },
-    changeItemBoard: (state, action: PayloadAction<ChangeItemStatePayload>) => {
+    changeItemBoard: (
+      state,
+      action: PayloadAction<ChangeItemStatusPayload>
+    ) => {
       const { origin, destination, id } = action.payload;
       const itemIndex = state[origin].findIndex((task) => task.id === id);
       if (itemIndex === -1) return; // Item not found, exit early
@@ -80,7 +82,6 @@ const GlobalState = createSlice({
     },
     editItemValue: (state, action: PayloadAction<EditItemValue>) => {
       const { item, origin } = action.payload;
-      console.log(item, origin);
       const itemIndex = state[origin].findIndex((task) => task.id === item.id);
       if (itemIndex === -1) {
         const arreyLength = state[origin].length;

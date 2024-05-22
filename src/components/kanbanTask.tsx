@@ -1,27 +1,26 @@
 import { Box, Chip, IconButton, Input, Tooltip, Typography } from "@mui/joy";
-import { ItemState, Task } from "../../types/Task";
-import { Item } from "./Item.style";
+import { Item } from "./item.style";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
-import { deleteItem, editItemValue } from "../store/Store.StateManager";
+import { deleteItem, editItemValue } from "../store/stateManager";
 import { useDispatch } from "react-redux";
 
-type ColumnName = ItemState;
+type ColumnName = ItemStatus;
 
-type ItemElementProps = {
+type KanbanTaskProps = {
   columnName: ColumnName | null;
   item: Task;
-  setOrigin: React.Dispatch<React.SetStateAction<ItemState | null>>;
+  setOrigin: React.Dispatch<React.SetStateAction<ItemStatus | null>>;
   setDragged: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export function ItemElement({
+export function KanbanTask({
   setOrigin,
   columnName,
   item,
   setDragged,
-}: ItemElementProps) {
+}: KanbanTaskProps) {
   const dispatch = useDispatch();
   const [editItem, setEditItem] = useState<boolean>(false);
   const [itemValue, setItemValue] = useState<Task | null>(null);
@@ -60,18 +59,15 @@ export function ItemElement({
           taskField === "description" ? value : itemValue.description
         }`,
       };
-      // setItemValue(task);
-      console.log(task);
       dispatch(editItemValue({ origin: columnName, item: task }));
     }
-    console.log(taskField, value);
   };
 
-  function deleteTask(): void {
+  const deleteTask = (): void => {
     if (itemValue && columnName !== null) {
       dispatch(deleteItem({ origin: columnName, id: itemValue.id }));
     }
-  }
+  };
 
   return (
     <Item

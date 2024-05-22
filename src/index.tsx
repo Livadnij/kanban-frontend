@@ -4,7 +4,12 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CssBaseline, CssVarsProvider, extendTheme } from "@mui/joy";
 import { Provider } from "react-redux";
-import { store } from "./components/store/storeProvider";
+import { store } from "./store/storeProvider";
+import { configAxios } from "./config/axiosConfig";
+import { configMSW } from "./config/configMSW";
+
+configAxios();
+configMSW();
 
 const baseTheme = extendTheme();
 

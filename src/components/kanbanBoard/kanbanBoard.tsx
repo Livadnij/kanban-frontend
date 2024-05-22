@@ -1,29 +1,20 @@
-"use clients";
 import React, { useState } from "react";
+
 import { Box, Grid } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
-import { changeItemBoard } from "../store/Store.StateManager";
-import { GridElement } from "./GridElement";
-import { ItemState } from "../../types/Task";
-import { RootState } from "../store/Store";
 
-type Item = {
-  origin: ItemState;
-  destination: ItemState;
-  id: string;
-};
+import { changeItemBoard } from "../../store/stateManager";
+import { GridElement } from "../gridElement/gridElement";
+import { RootState } from "../../store/store";
 
-// Component
-export const BlockContainer: React.FC = () => {
+export const KanbanBoard: React.FC = () => {
   const dispatch = useDispatch();
 
   const itemsList = useSelector((state: RootState) => state.globalState);
 
-  const [draggedOver, setDraggedOver] = useState<ItemState | null>(null);
+  const [draggedOver, setDraggedOver] = useState<ItemStatus | null>(null);
   const [dragged, setDragged] = useState<string | null>(null);
-  const [origin, setOrigin] = useState<ItemState | null>(null);
-
-  console.log(draggedOver, dragged);
+  const [origin, setOrigin] = useState<ItemStatus | null>(null);
 
   const GridChangeHandler = (): void => {
     if (origin && draggedOver && dragged !== null) {
@@ -32,7 +23,6 @@ export const BlockContainer: React.FC = () => {
         destination: draggedOver,
         id: dragged,
       };
-      console.log(item);
       dispatch(changeItemBoard(item));
     }
   };
@@ -41,10 +31,17 @@ export const BlockContainer: React.FC = () => {
       <Grid
         container
         spacing={2}
-        sx={{ flexGrow: 1, display: `${itemsList.name ? "" : "none"}` }}
+        sx={{
+          flexDirection: { xs: "column", md: "row" },
+          flexGrow: 1,
+          display: `${itemsList.name ? "" : "none"}`,
+          // "@media (min-width: 780px)": {
+          //   flexDirection: "column",
+          // },
+        }}
       >
         <GridElement
-          GridChangeHandler={GridChangeHandler}
+          gridChangeHandler={GridChangeHandler}
           columnName="to_do"
           draggedOver={draggedOver}
           setDraggedOver={setDraggedOver}
@@ -52,7 +49,7 @@ export const BlockContainer: React.FC = () => {
           setOrigin={setOrigin}
         />
         <GridElement
-          GridChangeHandler={GridChangeHandler}
+          gridChangeHandler={GridChangeHandler}
           columnName="in_progress"
           draggedOver={draggedOver}
           setDraggedOver={setDraggedOver}
@@ -60,7 +57,7 @@ export const BlockContainer: React.FC = () => {
           setOrigin={setOrigin}
         />
         <GridElement
-          GridChangeHandler={GridChangeHandler}
+          gridChangeHandler={GridChangeHandler}
           columnName="done"
           draggedOver={draggedOver}
           setDraggedOver={setDraggedOver}

@@ -1,15 +1,16 @@
 import { Box } from "@mui/joy";
-import { Header } from "./components/header/HeaderContainer";
-import { BlockContainer } from "./components/blocks/BlockContainer";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+
+import { Header } from "./components/header/header";
+import { KanbanBoard } from "./components/kanbanBoard/kanbanBoard";
 
 function App() {
   return (
     <DndProvider backend={HTML5Backend}>
-      <Box sx={{ margin: 2, marginLeft: "50px", marginRight: "50px" }}>
+      <Box sx={{ margin: 2, marginLeft: "20px", marginRight: "20px" }}>
         <Header />
-        <BlockContainer />
+        <KanbanBoard />
       </Box>
     </DndProvider>
   );
