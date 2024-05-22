@@ -73,7 +73,7 @@ export const CreateBoardModal: React.FC<CreateBoardModal> = ({
         ></Input>
         <Box sx={{ display: `${boardID !== null ? "" : "none"}` }}>
           Please, save this ID to be able to connect to your task board :
-          <Typography level="h2">{boardID}</Typography>
+          <Typography level="h3">{boardID}</Typography>
         </Box>
         <Button
           loading={loading}

@@ -35,9 +35,6 @@ export const KanbanBoard: React.FC = () => {
           flexDirection: { xs: "column", md: "row" },
           flexGrow: 1,
           display: `${itemsList.name ? "" : "none"}`,
-          // "@media (min-width: 780px)": {
-          //   flexDirection: "column",
-          // },
         }}
       >
         <GridElement
